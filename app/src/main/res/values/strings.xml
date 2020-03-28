@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">My Weather</string>
+
+    <!-- region LandingFragment-->
+    <string name="fragment_landing_title_label">Welcome to My Weather App</string>
+    <string name="fragment_landing_weather_btn">Weather (Step 1)</string>
+    <string name="fragment_landing_forecast_btn">Forecast (Step 2)</string>
+    <!--endregion-->
+
+    <!--region Weather-->
+    <string name="fragment_weather_city_name_edit">Dubai, Abu Dhabi</string>
+    <string name="fragment_weather_city_name_desc_label">Please enter the city name below\nfeel free to write multiple city names but make sure it\'s comma separated</string>
+    <string name="fragment_weather_get_data">get data</string>
+    <string name="fragment_weather_error_this_field_required">This field required</string>
+    <string name="fragment_weather_error_range">at least %d &amp; at most %d</string>
+    <string name="fragment_weather_label_max_temp">"Max temp : %.2f°"</string>
+    <string name="fragment_weather_label_min_temp">"Min temp : %.2f°"</string>
+    <string name="fragment_weather_label_wind">"Wind speed : %.2f°"</string>
+    <!--endregion-->
+
+    <!--region Forecast-->
+    <string name="fragment_forecast_error_cant_get_location">"Unable to get your location "</string>
+
+    <!--endregion-->
+
+    <!--region Screen Titles-->
+    <string name="fragment_landing_title">"My Weather "</string>
+    <string name="fragment_weather_title">Weather</string>
+    <string name="fragment_forecast_title">Forecast</string>
+    <!--endregion-->
+
+    <!--region general-->
+    <string name="km_per_h">%s km/h</string>
+    <string name="weather_fragment_error_no_result_found">No result found</string>
+    <!--endregion-->
+
+</resources>

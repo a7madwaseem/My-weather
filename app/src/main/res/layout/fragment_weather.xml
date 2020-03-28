@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.myweather.app.viewmodels.WeatherViewModel" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/view_margin_double">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/fragment_weather_city_name_desc_label"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/cityNameEdit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/view_margin_double"
+            android:background="@drawable/bg_blue_rounded_corners"
+            android:hint="@string/fragment_weather_city_name_edit"
+            android:imeOptions="actionDone"
+            android:inputType="text"
+            android:padding="@dimen/view_padding_double"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <Button
+            android:id="@+id/getDataButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/view_margin_long"
+            android:layout_marginEnd="@dimen/view_margin_long"
+            android:text="@string/fragment_weather_get_data"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/cityNameEdit"
+            app:layout_constraintStart_toStartOf="@+id/cityNameEdit" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/resultRecycler"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/view_margin_long"
+            android:visibility="@{!viewModel.isLoading() ? View.VISIBLE  : View.GONE}"
+            app:layout_constraintBottom_toTopOf="@+id/getDataButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cityNameEdit" />
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{viewModel.isLoading() ? View.VISIBLE  : View.GONE}"
+            app:layout_constraintBottom_toTopOf="@+id/getDataButton"
+            app:layout_constraintEnd_toEndOf="@+id/resultRecycler"
+            app:layout_constraintStart_toStartOf="@+id/resultRecycler"
+            app:layout_constraintTop_toBottomOf="@+id/cityNameEdit" />
+
+        <TextView
+            style="@style/AppTextAppearance.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/weather_fragment_error_no_result_found"
+            android:visibility="@{viewModel.isEmptyResult() ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toTopOf="@+id/getDataButton"
+            app:layout_constraintEnd_toEndOf="@+id/resultRecycler"
+            app:layout_constraintStart_toStartOf="@+id/resultRecycler"
+            app:layout_constraintTop_toTopOf="@+id/resultRecycler" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

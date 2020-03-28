@@ -1,0 +1,40 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="colorControlNormal">@color/colorWhite</item>
+    </style>
+
+
+    <!--region Text Styles-->
+    <style name="AppTextAppearance.huge" parent="android:TextAppearance.Small">
+        <item name="android:textSize">96sp</item>
+        <item name="android:textColor">@color/colorDarkGray</item>
+    </style>
+    <style name="AppTextAppearance.Small" parent="android:TextAppearance.Small">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@color/colorDarkGray</item>
+    </style>
+
+    <style name="AppTextAppearance.ExtraSmall" parent="android:TextAppearance.Small">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/colorGray</item>
+    </style>
+
+    <style name="AppTextAppearance.VeryExtraSmall" parent="android:TextAppearance.Small">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/colorGray</item>
+    </style>
+    <style name="AppTextAppearance.Smallest" parent="android:TextAppearance.Small">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/colorGray</item>
+    </style>
+    <!--endregion-->
+
+
+</resources>

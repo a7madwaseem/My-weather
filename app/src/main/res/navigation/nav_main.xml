@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_main"
+    app:startDestination="@id/landingFragment">
+    <fragment
+        android:id="@+id/landingFragment"
+        android:name="com.myweather.app.ui.fragment.landing.LandingFragment"
+        android:label="@string/fragment_landing_title"
+        tools:layout="@layout/fragment_landing">
+        <action
+            android:id="@+id/action_landingFragment_to_step1Fragment"
+            app:destination="@id/step1Fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_landingFragment_to_step2Fragment"
+            app:destination="@id/step2Fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/step1Fragment"
+        android:name="com.myweather.app.ui.fragment.weather.WeatherFragment"
+        android:label="@string/fragment_weather_title"
+        tools:layout="@layout/fragment_weather" />
+    <fragment
+        android:id="@+id/step2Fragment"
+        android:name="com.myweather.app.ui.fragment.forecast.ForecastFragment"
+        android:label="@string/fragment_forecast_title"
+        tools:layout="@layout/fragment_forecast" />
+</navigation>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.myweather.app.network.model.ForecastDayItem.Item" />
+
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="0dp"
+        app:cardUseCompatPadding="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/view_padding_double">
+
+
+            <TextView
+                android:id="@+id/timeLabel"
+                style="@style/AppTextAppearance.VeryExtraSmall"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:includeFontPadding="false"
+                android:maxLines="1"
+                android:textColor="@color/colorDarkGray"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/windSpeedLabel"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:text="@{item.day.formattedTime}"
+                tools:text="time label" />
+
+            <TextView
+                android:id="@+id/maxTempLabel"
+                style="@style/AppTextAppearance.VeryExtraSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{item.day.main.maxTemp + `\n` + item.day.main.minTemp}"
+                android:textColor="@color/colorDarkGray"
+                app:layout_constraintBottom_toBottomOf="@+id/cityNameLabel"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/windSpeedLabel"
+                app:layout_constraintTop_toTopOf="@+id/cityNameLabel"
+                tools:text="26" />
+
+
+            <TextView
+                android:id="@+id/windSpeedLabel"
+                style="@style/AppTextAppearance.Smallest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/view_margin_double"
+                android:layout_marginEnd="@dimen/view_margin_double"
+                android:text="@{@string/km_per_h(item.day.wind.windSeed)}"
+                app:layout_constraintBaseline_toBaselineOf="@+id/timeLabel"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.64"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:text="10" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</layout>
