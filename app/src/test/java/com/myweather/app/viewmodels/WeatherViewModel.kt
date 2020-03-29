@@ -6,8 +6,10 @@ import com.jraska.livedata.test
 import com.myweather.app.network.api.Resource
 import com.myweather.app.network.model.WeatherResponse
 import com.myweather.app.repository.Repository
+import com.myweather.app.utils.getOrAwaitValue
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
+import junit.framework.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -70,4 +72,24 @@ class WeatherViewModelTest {
         successObserver.assertHasValue().assertValue(false)
     }
 
+
+    @Test
+    fun isSuccessTest() {
+
+        val loadingObserver = viewModel.isLoading().test()
+        val errorObserver = viewModel.isError().test()
+        val successObserver = viewModel.isSuccess().test()
+
+        val cityName = viewModel.getCurrentLocationName()
+        val weatherObserver = viewModel.getWeatherResponse()
+
+        viewModel.callCurrentWeatherApi("Dubai")
+
+        assertEquals(weatherObserver.getOrAwaitValue().name, "Dubai")
+        assertEquals(cityName.getOrAwaitValue(), "Dubai")
+
+        loadingObserver.assertHasValue().assertValue(false)
+        errorObserver.assertHasValue().assertValue(false)
+        successObserver.assertHasValue().assertValue(true)
+    }
 }

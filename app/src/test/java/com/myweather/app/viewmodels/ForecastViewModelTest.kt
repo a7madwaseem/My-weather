@@ -5,12 +5,13 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import com.jraska.livedata.test
 import com.myweather.app.network.api.Resource
-import com.myweather.app.network.api.ResourceError
 import com.myweather.app.network.http.BaseHttpClient
-import com.myweather.app.network.model.*
+import com.myweather.app.network.model.ForecastResponse
 import com.myweather.app.repository.Repository
+import com.myweather.app.utils.getOrAwaitValue
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
+import junit.framework.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -62,69 +63,28 @@ class ForecastViewModelTest {
         successObserver.assertHasValue().assertValue(false)
     }
 
-    @Test
-    fun testWeatherForecastAPIError() {
-        // init
-        val loadingObserver = viewModel.isLoading().test()
-        val errorObserver = viewModel.isError().test()
-        val successObserver = viewModel.isSuccess().test()
-        val resourceErrorObserver = viewModel.getError().test()
-        val error = ResourceError().apply {
-            error = Error("No location found")
-        }
-
-        val resource: Resource<ForecastResponse> = Resource.error(error)
-        forecastResponse.value = resource
-        whenever(repository.getForecastWeather(lat, lon)).thenReturn(
-            forecastResponse
-        )
-        viewModel.callForecastApi(lat, lon)
-
-        //Assert
-        resourceErrorObserver.assertHasValue().assertValue { it.error == Error("No location found ") }
-        loadingObserver.assertHasValue().assertValue(false)
-        errorObserver.assertHasValue().assertValue(true)
-        successObserver.assertHasValue().assertValue(false)
-    }
 
     @Test
     fun isSuccessTest() {
 
-        // init
         val loadingObserver = viewModel.isLoading().test()
         val errorObserver = viewModel.isError().test()
         val successObserver = viewModel.isSuccess().test()
-        val weatherObserver = viewModel.getCurrentLocationName().test()
-        val forecastObserver = viewModel.getForecastResponse().test()
+        val cityName = viewModel.getCurrentLocationName()
+        val forecastObserver = viewModel.getForecastResponse()
 
-        // Response
-        val city = City("Dubai")
-        val day = Day(1234, "28-3-2020", Main(30.0, 20.0), Wind(10.0))
-        val response = ForecastResponse(city, listOf(day))
-
-        val resource: Resource<ForecastResponse> = Resource.success(response)
+        viewModel.callForecastApi(lat, lon)
+        val resource: Resource<ForecastResponse> = Resource.success(null)
         forecastResponse.value = resource
         whenever(repository.getForecastWeather(lat, lon)).thenReturn(forecastResponse)
-        //viewModel.callForecastApi(lat, lon)
 
-        //assert
-        viewModel.getForecastResponse().observeForever( forecastObserver)
 
-       // weatherObserver.assertHasValue().assertValue { it == "Dubai" }
-        forecastObserver.assertHasValue().assertValue { it.daysList.size == 1 }
-        forecastObserver.assertHasValue().assertValue { it.daysList[0].main.tempMax == 30.0 }
-        forecastObserver.assertHasValue().assertValue { it.daysList[0].main.tempMin == 20.0 }
-        forecastObserver.assertHasValue().assertValue { it.daysList[0].wind.speed == 20.0 }
-        forecastObserver.assertHasValue()
-            .assertValue { it.daysList[0].wind.getWindSeed() == "20.0" }
+        assertEquals(forecastObserver.getOrAwaitValue().daysList.size, 40)
+        assertEquals(cityName.getOrAwaitValue(), "Ash Shindaghah")
+
         loadingObserver.assertHasValue().assertValue(false)
         errorObserver.assertHasValue().assertValue(false)
         successObserver.assertHasValue().assertValue(true)
     }
 
-    @Test
-    fun testOnCleared() {
-
-       // viewModel.onCleared()
-    }
 }

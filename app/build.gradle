@@ -88,5 +88,6 @@ dependencies {
     testImplementation 'org.mockito:mockito-core:2.24.5'
     androidTestImplementation 'org.mockito:mockito-android:2.24.5'
     testImplementation 'org.mockito:mockito-inline:2.13.0'
+    implementation 'androidx.test.ext:truth:1.2.0'
 
 }
